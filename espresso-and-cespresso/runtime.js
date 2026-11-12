@@ -196,8 +196,9 @@ function transformCasts(expression) {
 
 function transformExpression(expression, functionNames = []) {
   let result = transformCasts(transformPipes(expression.trim()));
-  result = result.replace(/`((?:\\.|[^`\\])*)`/g, (_, value) => `\`${value.replace(/\{([^{}]*)\}/g, "${$1}")}\``);
-  result = result.replace(/\$"((?:\\.|[^"\\])*)"/g, (_, value) => `\`${value.replace(/\{([^{}]*)\}/g, "${$1}")}\``);
+  const transformInterpolation = (value) => value.replace(/\{([^{}]*)\}/g, (_, expression) => `\${${expression}}`);
+  result = result.replace(/`((?:\\.|[^`\\])*)`/g, (_, value) => `\`${transformInterpolation(value)}\``);
+  result = result.replace(/\$"((?:\\.|[^"\\])*)"/g, (_, value) => `\`${transformInterpolation(value)}\``);
   result = replaceOutsideStrings(result, /\b(and|or|not|nil)\b/g, (token) => ({
     and: "&&", or: "||", not: "!", nil: "null"
   })[token]);
@@ -439,4 +440,43 @@ function formatValue(value) {
   return String(value);
 }
 
-module.exports = { compile, run };
+function formatError(error) {
+  const type = error && typeof error.name === "string" ? error.name : "Error";
+  const message = error && typeof error.message === "string" ? error.message : String(error);
+  let explanation = "The program stopped because execution raised an error.";
+  let tip = "Review the message and the statement that was running, then try again.";
+
+  if (type === "SyntaxError") {
+    explanation = "The runner could not parse the statement as valid Espresso or cEspresso syntax.";
+    tip = "Check indentation, colons, brackets, and whether the syntax matches the file's language.";
+  } else if (type === "ReferenceError") {
+    explanation = "The program used a variable or function name that is not defined in the current scope.";
+    tip = "Check the spelling and make sure the name is declared before it is used.";
+  } else if (type === "TypeError") {
+    explanation = "An operation was attempted on a value that does not support it, such as calling a missing method or using nil.";
+    tip = "Check the value and its type before using it; optional values may be nil.";
+  } else if (type === "RangeError") {
+    explanation = "A numeric value or operation is outside the range supported by the runtime.";
+    tip = "Check the value's bounds and reduce unusually large ranges or sizes.";
+  } else if (message.includes("range() cannot create more than one million values")) {
+    explanation = "The requested range contains more than the runtime's one-million-value limit.";
+    tip = "Use a smaller range or process the values in smaller batches.";
+  } else if (message.includes("exceeding one million loop iterations")) {
+    explanation = "The loop exceeded the runtime's one-million-iteration safety limit.";
+    tip = "Check that the loop condition can become false, or reduce the amount of work.";
+  } else if (message.startsWith("Unsupported control statement:")) {
+    explanation = "This control statement form is not supported by the runner.";
+    tip = "Check the language examples in the README and use a supported condition or loop form.";
+  }
+
+  return [
+    "┌─ Espresso / cEspresso error ─────────────────",
+    `│ Type: ${type}`,
+    `│ Message: ${message}`,
+    `│ What went wrong: ${explanation}`,
+    `│ Tip: ${tip}`,
+    "└──────────────────────────────────────────────"
+  ].join("\n");
+}
+
+module.exports = { compile, formatError, run };

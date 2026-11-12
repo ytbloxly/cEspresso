@@ -130,7 +130,7 @@ function activate(context) {
         output.appendLine("\nProcess finished.");
       }
     } catch (error) {
-      output.appendLine(`\n${error instanceof Error ? error.message : String(error)}`);
+      output.appendLine(`\n${runtime.formatError(error)}`);
       if (!runState.cancelled) {
         void vscode.window.showErrorMessage(`Espresso: ${error instanceof Error ? error.message : String(error)}`);
       }
