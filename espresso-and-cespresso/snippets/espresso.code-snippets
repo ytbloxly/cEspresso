@@ -1,0 +1,64 @@
+{
+  "Print statement": {
+    "prefix": "print",
+    "body": "print(${1:\"${2:text}\"})",
+    "description": "Print a value"
+  },
+  "Function": {
+    "prefix": "fn",
+    "body": [
+      "fn ${1:name}(${2:arguments}):",
+      "\t$0"
+    ],
+    "description": "Declare an Espresso function"
+  },
+  "If / elseif / else": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition}:",
+      "\t${2:pass}",
+      "elseif ${3:condition}:",
+      "\t${4:pass}",
+      "else:",
+      "\t$0"
+    ],
+    "description": "Create a conditional"
+  },
+  "For loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} in range(${2:0}, ${3:10}):",
+      "\t$0"
+    ],
+    "description": "Iterate over a range"
+  },
+  "While loop": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition}:",
+      "\t$0"
+    ],
+    "description": "Create a while loop"
+  },
+  "Variable": {
+    "prefix": "var",
+    "body": "var ${1:name} = ${2:nil}",
+    "description": "Declare a dynamically typed variable"
+  },
+  "Interpolated string": {
+    "prefix": "fstr",
+    "body": "$\"${1:Text with {value}}\"",
+    "description": "Create a string with interpolation"
+  },
+  "Factorial example": {
+    "prefix": "factorial",
+    "body": [
+      "fn factorial(${1:n}):",
+      "\tif $1 <= 1:",
+      "\t\treturn 1",
+      "\telse:",
+      "\t\treturn $1 * factorial($1 - 1)"
+    ],
+    "description": "Create a recursive factorial function"
+  }
+}

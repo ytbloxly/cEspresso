@@ -1,0 +1,115 @@
+# print()
+print("Hello World!")
+
+# one-line comment
+#/ multi
+line
+comment /#
+
+# In Espresso, variables have dynamic typing with possible casting
+var name = (string) "Coder"
+ver grade = (char) 'A'
+
+# ver has temporal dead zone, var doesnt have it
+# You can also cast with: (bool), (int) and (double). There isnt need for casting
+# there is true, false and nil
+
+# F-string
+var age = 21
+print(`Your age is {age}`)
+print($"Your age is {age}")
+
+# logical operators: and, or, not, >, <, <=, >=, ==, !=
+# math operators and shortcuts: +, -, /, //, %, *, **, +=, -=, /=, //=, *=, **=
+
+# if statements
+
+var age = (int) 21
+
+if age == 21:
+    print($"My age is {age}")
+elseif age != 21:
+    print("My age isnt 21!")
+elseif age < 0:
+    print("I cannot be that young!")
+else:
+    print("All are wrong")
+
+# for loops
+
+for i in range(1, 12):
+    print(i) # from 1 to 12
+
+# functions
+
+fn add(a, b):
+    return a + b
+
+print(add(2, 21))
+
+# there is also break, continue and pass
+
+# while loops
+
+while true:
+    print("Hello World!")
+    wait(2)
+
+# inputs
+
+var name = (string) input("What is your name? ")
+print($"Hello, {name}!")
+
+# default values
+
+fn hello(name, greeting = "Good Morning"):
+    return `{greeting}, {name}!`
+
+print(hello("John")) # Good Morning, John!
+print(hello("Anne", "Hello")) # Hello, Anne!
+
+# incrementation and decrementation
+int i = 2
+i++
+++i
+i--
+--i
+print(i) # 2
+
+# arrays
+var numbers = [1, 2, 3]
+var appleDescription = ["Apple", 2, 2.99]
+
+# tuples and sets
+
+var toAdd = (1, 2, 4)
+var ones = {1, 2, 3, 2, 1}
+
+# string methods
+var string = " Welcome to Espresso! "
+string.upper()
+string.lower()
+string.split(" ")
+string.trim()
+string.replace()
+string.repeat()
+string.at()
+string.slice()
+string.substring()
+string.substr()
+
+# pipe operator |>
+var string = "Welcome to Espresso!"
+var newString = string
+    |> .upper()
+    |> .split()
+    |> .at()
+
+# recursive functions
+fn factorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print(factorial(4)) # 24

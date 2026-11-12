@@ -1,0 +1,103 @@
+{
+  "name": "espresso-cespresso",
+  "publisher": "local",
+  "displayName": "Espresso and cEspresso",
+  "description": "Language support and an embedded runner for Espresso and cEspresso.",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:espresso",
+    "onLanguage:cespresso",
+    "onCommand:espresso.runFile",
+    "onCommand:espresso.stopFile"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "espresso.runFile",
+        "title": "Run Espresso File",
+        "icon": "$(play)"
+      },
+      {
+        "command": "espresso.stopFile",
+        "title": "Stop Espresso File",
+        "icon": "$(debug-stop)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "espresso.runFile",
+          "when": "(editorLangId == espresso || editorLangId == cespresso) && !espresso.running",
+          "group": "navigation",
+          "alt": "espresso.stopFile"
+        },
+        {
+          "command": "espresso.stopFile",
+          "when": "(editorLangId == espresso || editorLangId == cespresso) && espresso.running",
+          "group": "navigation"
+        }
+      ]
+    },
+    "languages": [
+      {
+        "id": "espresso",
+        "aliases": [
+          "Espresso",
+          "espresso"
+        ],
+        "extensions": [
+          ".esp",
+          ".espr",
+          ".ess",
+          ".espresso"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "cespresso",
+        "aliases": [
+          "cEspresso",
+          "cespresso"
+        ],
+        "extensions": [
+          ".cesp",
+          ".cespr",
+          ".cess",
+          ".cespresso"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "espresso",
+        "scopeName": "source.espresso",
+        "path": "./syntaxes/espresso.tmLanguage.json"
+      },
+      {
+        "language": "cespresso",
+        "scopeName": "source.cespresso",
+        "path": "./syntaxes/cespresso.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "espresso",
+        "path": "./snippets/espresso.code-snippets"
+      },
+      {
+        "language": "cespresso",
+        "path": "./snippets/cespresso.code-snippets"
+      }
+    ]
+  }
+}

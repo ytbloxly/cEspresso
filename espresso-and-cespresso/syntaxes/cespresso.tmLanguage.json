@@ -1,0 +1,8 @@
+{
+  "scopeName": "source.cespresso",
+  "patterns": [
+    {
+      "include": "source.espresso"
+    }
+  ]
+}

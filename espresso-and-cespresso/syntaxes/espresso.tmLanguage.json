@@ -1,0 +1,144 @@
+{
+  "scopeName": "source.espresso",
+  "patterns": [
+    {
+      "name": "comment.block.espresso",
+      "begin": "#/",
+      "end": "/#"
+    },
+    {
+      "name": "comment.line.number-sign.espresso",
+      "match": "#(?!/).*?$"
+    },
+    {
+      "name": "string.quoted.double.interpolated.espresso",
+      "begin": "\\$\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.espresso"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.espresso"
+        }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.espresso",
+          "match": "\\\\."
+        },
+        {
+          "name": "meta.interpolation.espresso",
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.interpolation.begin.espresso"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.interpolation.end.espresso"
+            }
+          },
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.backtick.interpolated.espresso",
+      "begin": "`",
+      "end": "`",
+      "patterns": [
+        {
+          "name": "meta.interpolation.espresso",
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.interpolation.begin.espresso"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.interpolation.end.espresso"
+            }
+          },
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.double.espresso",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.espresso",
+          "match": "\\\\."
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.single.espresso",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.espresso",
+          "match": "\\\\."
+        }
+      ]
+    },
+    {
+      "name": "constant.language.boolean.espresso",
+      "match": "\\b(true|false|nil)\\b"
+    },
+    {
+      "name": "storage.type.espresso",
+      "match": "\\b(string|int|double|char|bool|list2D|list3D|tuple2D|tuple3D|set2D|set3D)\\b"
+    },
+    {
+      "name": "keyword.control.espresso",
+      "match": "\\b(if|elseif|else|for|while|fn|return|break|continue|pass|in|var|ver)\\b"
+    },
+    {
+      "name": "keyword.operator.word.espresso",
+      "match": "\\b(and|or|not)\\b"
+    },
+    {
+      "name": "support.function.espresso",
+      "match": "\\b(print|range|wait|input|prompt|upper|lower|split|trim|replace|repeat|at|slice|substring|substr)\\b(?=\\s*\\()"
+    },
+    {
+      "name": "constant.numeric.espresso",
+      "match": "\\b\\d+(\\.\\d+)?\\b"
+    },
+    {
+      "name": "keyword.operator.espresso",
+      "match": "\\|>|\\*\\*=|//=|\\+=|-=|\\*=|/=|%=|\\*\\*|//|==|!=|<=|>=|&&|\\|\\||\\+\\+|--|[+*/%<>=!&|~-]"
+    },
+    {
+      "name": "entity.name.function.espresso",
+      "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\()"
+    },
+    {
+      "name": "variable.other.espresso",
+      "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\??(?![A-Za-z0-9_])"
+    },
+    {
+      "name": "punctuation.separator.espresso",
+      "match": "[,:.;]"
+    }
+  ]
+}

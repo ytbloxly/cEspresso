@@ -1,0 +1,135 @@
+# print()
+print("Hello World!")
+
+# one-line comment
+#/ multi
+line
+comment /#
+
+# In cEspresso, variables have static typing
+int num = 2
+double price = 12.99
+char grade = 'A'
+string name = "Coder"
+bool isActive = true
+
+# there is true, false and nil
+
+# Optionals
+int num? = 2 # can be 2 or nil
+
+# F-string
+int age = 21
+print(`Your age is {age}`)
+print($"Your age is {age}")
+
+# logical operators: &&, ||, !, >, <, <=, >=, ==, !=
+# math operators and shortcuts: +, -, /, //, %, *, **, +=, -=, /=, //=, *=, **=
+
+# if statements
+
+int age = 21
+
+if age == 21:
+    print($"My age is {age}")
+elseif age != 21:
+    print("My age isnt 21!")
+elseif age < 0:
+    print("I cannot be that young!")
+else:
+    print("All are wrong")
+
+# for loops
+# They are different in cEspresso than Espresso
+
+for (int i = 1, i < 12, i++):
+    print(i) # from 1 to 12
+
+# functions
+fn add(int a, int b):
+    return a + b
+
+print(add(2, 21))
+
+# there is also break, continue and pass
+
+# while loops
+
+while true:
+    print("Hello World!")
+    wait(2)
+
+# inputs
+# prompting and inputs are in the terminal
+
+string name = io.prompt("What is your name? ")
+print($"Hello, {name}!")
+
+# default values
+
+fn hello(string name, string greeting = "Good Morning"):
+    return `{greeting}, {name}!`
+
+print(hello("John")) # Good Morning, John!
+print(hello("Anne", "Hello")) # Hello, Anne!
+
+# incrementation and decrementation
+int i = 2
+i++
+++i
+i--
+--i
+print(i) # 2
+
+# placeholders
+
+for (_ = 1, _ < 12, _++):
+    print("Hello!")
+
+# arrays
+list2D: int numbers = [1, 2, 3]
+list3D: (string, int, double) appleDescription = ["Apple", 2, 2.99]
+
+# list2D can have one type of value, but list3D can have more, but you have to type types in the brackets
+
+# tuples and sets
+
+tuple2D: int toAdd = (1, 2, 4)
+set2D: int ones = {1, 2, 3, 2, 1}
+
+# there is also tuple3D and set3D
+
+# pipe operator |>
+list3D: appleDescription = ["Apple", 2, 2.99]
+    |> string
+    |> int
+    |> double
+
+# string methods
+string string1 = " Welcome to Espresso! "
+string1.upper()
+string1.lower()
+string1.split(" ")
+string1.trim()
+string1.replace()
+string1.repeat()
+string1.at()
+string1.slice()
+string1.substring()
+string1.substr()
+
+# pipe operator |>
+string string1 = "Welcome to Espresso!"
+string newString = string1
+    |> .upper()
+    |> .split()
+    |> .at()
+
+# recursive functions
+fn factorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print(factorial(4)) # 24
